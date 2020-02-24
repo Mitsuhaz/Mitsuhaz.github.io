@@ -276,7 +276,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-24 02:14:20" itemprop="dateModified" datetime="2020-02-24T02:14:20+08:00">2020-02-24</time>
+                <time title="修改时间：2020-02-24 02:31:29" itemprop="dateModified" datetime="2020-02-24T02:31:29+08:00">2020-02-24</time>
               </span>
 
           
@@ -291,10 +291,14 @@
 
       
           <p>​&emsp;&emsp;lower_bound的第三个参数传入一个元素 x，在两个迭代器(或指针)指定的部分上执行二分查找，返回指向第一个大于等于 x的元素的位置的迭代器(或指针)。</p>
-<p>​&emsp;&emsp;upper_bound的用法和lower_bound大致相同，唯一的区别是查找第一个大于 x的元素。当然，两个迭代器(或指针)指定的部分应该是提前排好序的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在有序 <span class="keyword">int</span> 数组(元素存放在下标 <span class="number">1</span> ~ n)中查找大于等于 x的最小整数的下标：</span><br><span class="line"><span class="keyword">int</span> i = lower_bound(a+<span class="number">1</span>, a+n+<span class="number">1</span>, x) - a;</span><br><span class="line"></span><br><span class="line">在有序 <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; 中查找小于等于 x的最大整数(假设一定存在):</span><br><span class="line"><span class="keyword">int</span> y = *--upper_bound(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>(), x);</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/20/lower-bound-upper-bound-%E4%BA%8C%E5%88%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -344,7 +348,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-24 02:14:20" itemprop="dateModified" datetime="2020-02-24T02:14:20+08:00">2020-02-24</time>
+                <time title="修改时间：2020-02-24 02:31:12" itemprop="dateModified" datetime="2020-02-24T02:31:12+08:00">2020-02-24</time>
               </span>
 
           
@@ -359,15 +363,14 @@
 
       
           <h1 id="二分简介"><a href="#二分简介" class="headerlink" title="二分简介"></a>二分简介</h1><p>​&emsp;&emsp;二分的基础的用法是在单调序列或单调函数种进行查找。因此当问题的答案具有单调性时，就可以通过二分把求解转化为判定(根据复杂度理论，判定的难度小于求解)，这使得二分的运用范围变得很广泛。进一步地，我们还可以扩展到通过三分法去解决单峰函数的极值以及相关问题。</p>
-<p>​&emsp;&emsp;对于整数域上的二分，需要注意终止边界、左右区间取舍时的开闭情况，避免漏掉答案或造成死循环；对于实域上的二分，需要注意精度问题。</p>
-<h1 id="整数集合上的二分"><a href="#整数集合上的二分" class="headerlink" title="整数集合上的二分"></a>整数集合上的二分</h1><p>​&emsp;&emsp;下面二分的写法保证最终答案处于闭区间 $[l, r]$ 以内，循环以 $l = r$ 结束，每次二分的中间值 $mid$ 会归属于左半段于右半段的二分之一。</p>
-<p>在单调递增序列 $a$ 中查找 $ \geq x$  的数中最小的一个(即 $x$ 或 $x$ 的后继) :</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt; r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt;= x)	r = mid;</span><br><span class="line">    <span class="keyword">else</span>	l = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> a[l];</span><br></pre></td></tr></table></figure>
-
-<p>在单调递增序列 $a$ 查找 $ \leq x $ 的数中最大的一个(即 $x$ 或 $x$ 的前驱):</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt; r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &lt;= x)	l = mid;</span><br><span class="line">    <span class="keyword">else</span>	r = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/19/%E5%85%B3%E4%BA%8E%E4%BA%8C%E5%88%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
